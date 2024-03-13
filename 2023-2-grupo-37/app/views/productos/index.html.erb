@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Grupo 37</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <%= render 'shared/header' %>
+    <main>
+      <div class="filtro">
+        <% if current_user %>
+          <a href="/productos/new">
+            <button class="custom-button-main">
+                  Subir Producto
+                  <div class="arrow-wrapper">
+                    <div class="arrow"></div>
+                  </div>
+            </button>
+          </a>
+
+          <a href="/usuario/<%= current_user.id %>/favoritos">
+            <button class="custom-button-main">
+              Mis Favoritos
+              <div class="arrow-wrapper">
+                <div class="arrow"></div>
+              </div>
+            </button>
+          </a>
+        <% end %>
+
+        <select id="lista_tendencias" class="filtroselect" onchange="redirigirSegunSeleccion()">
+          <option value="">Ordenar por:</option>
+          <option value="Todo">Tendencias</option>
+          <option value="Populares">Populares</option>
+        </select>
+
+
+        <select id="lista_filtro" class="filtroselect">
+              <option value="">Todo</option>
+              <option value="Polera">Polera</option>
+              <option value="Poleron">Poleron</option>
+              <option value="Pantalon">Pantalon</option>
+              <option value="Accesorio">Accesorio</option>
+        </select><br>
+          <input type="search" class="search-input" placeholder="Buscar producto" id="search-input">
+        </div>
+                <section class="productos">
+                <% if Producto.count <= 0  or @productos.all? { |producto| producto.disponible == false }%>
+                    <h1 class="btn">NO HAY PRODUCTOS</h1>
+                <% else %>
+                  <% @productos.each do |producto| %>
+                      <% if producto.disponible == true %>
+                      <div class="producto <%= producto.categoria %>">
+                        <div class="card">
+                          <div class="content">
+                            <div class="back">
+                              <div class="back-content">
+                                <% if producto.image.attached? %>
+                                <div class="imagen-producto">
+                                  <img src="<%= url_for(producto.image.variant(resize_to_fit:[100,100]))%>">
+                                </div>
+                                <% end %>
+                              </div>
+                            </div>
+                            <div class="front">
+                              <div class="img">
+                              </div>
+                            <% if current_user %>
+                              
+                              <div class="front-content">
+                                <small class="badge">
+                                  <strong style="color: #9ecfe8;"> 
+                                    <%= "#{producto.nombre}" %>
+                                  </strong>
+                                </small>
+
+                                <small class="badge-left">
+                                  <%= link_to "Ver", producto_path(producto)%>
+                                </small>
+                                <div class="description">
+                                  <div class="description-title">
+                                    <%= "Descripción: #{producto.descripcion}" %>
+                                  </div>
+                                  <p class="card-footer">
+
+                                  </p>
+                                </div>
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+        <script>
+          const select_search = document.getElementById('search-input');
+          const select_filter = document.getElementById('lista_filtro');
+          const productos = document.querySelectorAll('.producto');
+   
+   
+          select_filter.addEventListener('change', (event) => {
+            const searchValue = select_search.value.toLowerCase();
+            const filterValue = event.target.value.toLowerCase();
+
+            productos.forEach((producto) => {
+              const nombre = producto.querySelector('.badge').textContent.toLowerCase();
+              const categoria = producto.classList[1].toLowerCase();
+
+              if ((nombre.includes(searchValue) || searchValue === '') && (categoria === filterValue || filterValue === '')) {
+                producto.style.display = 'block';
+              } else {
+                producto.style.display = 'none';
+              }
+            });
+          });
+          
+          select_search.addEventListener('input', (event) => {
+            const searchValue = event.target.value.toLowerCase();
+            const filterValue = select_filter.value.toLowerCase();
+
+            productos.forEach((producto) => {
+              const nombre = producto.querySelector('.badge').textContent.toLowerCase();
+              const categoria = producto.classList[1].toLowerCase();
+
+              if ((nombre.includes(searchValue) || searchValue === '') && (categoria === filterValue || filterValue === '')) {
+                producto.style.display = 'block';
+              } else {
+                producto.style.display = 'none';
+              }
+            });
+          });
+
+          function redirigirSegunSeleccion() {
+            const select = document.querySelector('#lista_tendencias');
+            const opcionSeleccionada = select.value;
+            
+            switch (opcionSeleccionada) {
+              case 'Populares':
+                window.location.replace('/producto/populares');
+                break;
+              case 'Todo': 
+                window.location.replace('/productos');
+                break;
+              default:
+                break;
+            }
+          }
+
+        </script>
+      </section>
+    </main>
+  </body>
+</html>

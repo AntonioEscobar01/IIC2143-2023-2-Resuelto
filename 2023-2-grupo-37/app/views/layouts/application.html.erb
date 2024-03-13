@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProyectoGrupo37</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+  <style>
+    <%= ".msg-#{current_user&.id}" %> {
+      background-color: #c8a0eb !important;
+      padding: 10px;
+    }
+    <%= ".cont-#{current_user&.id}" %> {
+      display: flex;
+      justify-content: flex-end
+    }
+  </style>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!-- FILEPATH: /Users/Noam/Desktop/Universidad/Semestre 4/Ingeniería de Software/Proyecto/2023-2-grupo-37/app/views/users/favoritos.html.erb -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Grupo 37</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <%= render 'shared/header' %>
+    <% if user_signed_in? %>
+      <main>
+        <div class="filtro">
+          <a href="/productos">
+            <button class="custom-button">
+              Todos los Productos
+              <div class="arrow-wrapper">
+                <div class="arrow"></div>
+              </div>
+            </button>
+          </a>
+        </div>
+        <section class="intercambios">
+          <% if @user.productos_fav.length > 0 %>
+            <% @user.productos_fav.each do |fav| %>
+              <% if Producto.find(fav[0]).disponible == true %>
+                <% producto = Producto.find(fav[0]) %>
+                <div class="card">
+                  <div class="content">
+                    <div class="back">
+                      <div class="back-content">
+                        <% if producto.image.attached? %>
+                          <div class="imagen-producto">
+                            <%= image_tag(producto.image.variant(resize_to_fit: [100, 100])) %>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="front">
+                      <div class="img"></div>
+                      <div class="front-content">
+                        <small class="badge">
+                          <strong style="color: black;"> 
+                            <%= link_to "#{producto.nombre}", producto_path(producto) %>
+                          </strong>
+                        </small>
+                        <div class="description">
+                          <div class="title">
+                            <p class="title">
+                              <%= "Descripción: #{producto.descripcion}" %>
+                            </p>
+                          </div>
+                          <p class="card-footer"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <h1 class="btn">NO HAY FAVORITOS</h1>
+          <% end %>
+        </section>
+      </main>
+    <% end %>
+  </body>
+</html>

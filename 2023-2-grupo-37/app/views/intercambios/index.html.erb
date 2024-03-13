@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Grupo 37</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <%= render 'shared/header' %>
+
+    <main>
+      <section class="intercambios">
+        <% if Intercambio.count <= 0 or @intercambios.all? { |intercambio| ![intercambio.id_cliente, intercambio.id_propietario].include?(current_user.id) } %>
+          <div class="btn">NO TIENES INTERCAMBIOS</div>
+        <% else%>
+          <% @intercambios.each do |intercambio| %>
+            <% if [intercambio.id_cliente, intercambio.id_propietario].include?(current_user.id) %>
+              <div class="intercambio">
+                <div class="atributo_dueno">Dueño </div>
+                <div class="dueno_inter"> <%= User.find(intercambio.id_propietario).name %> </div>
+
+                <div class="atributo_cliente">Cliente </div>
+                <div class="cliente_inter"> <%= User.find(intercambio.id_cliente).name %> </div>
+                
+                <div class="atributos">Producto</div>
+                <div class="producto_inter"> <%= Producto.find(intercambio.producto_id).nombre %> </div>
+                
+                <div class="atributos">Estado </div>
+                <div class="estado_inter"> <%= intercambio.estado %> </div> <br>
+
+                <%# agregar botones de editar y eliminar %>
+                <div class="editar_intercambio"> 
+                  <%= button_to 'Editar', editar_intercambio_path(intercambio.id), method: :get %> 
+                </div>
+
+                <div class="eliminar_intercambio">
+                  <%= button_to 'Eliminar', eliminar_intercambio_path(intercambio.id), method: :get %>
+                </div>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Grupo 37</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <%= render 'shared/header' %>
+
+    <main>
+      <div class="fondo_forms">
+        <div class="Bienvenida">
+          <h1><%= @producto.nombre %></h1>
+        </div>
+        <% if @producto.image.attached? %>
+          <div class="">
+            <img src="<%= url_for(@producto.image.variant(resize_to_fit:[100,100]))%>">
+          </div>
+        <% end %>
+          <div class="atributos">
+            <% if current_user.id != @producto.user_id %>
+              <h3>Dueño: <%= link_to @producto.user.name, ver_usuario_path(@producto.user_id) %></h3>
+            <% else %>
+              <h3>Dueño: <%= @producto.user.name %></h3>
+            <% end %>  
+
+            <h4>Categoría: <%= @producto.categoria %></h4>
+            <h4>Descricpión: <%= @producto.descripcion %></h4>
+          </div>
+        <% if current_user %>
+          <div class="div-botones">
+            <% if current_user.id == @producto.user.id %>
+              <div class="editar_producto">
+                <%= button_to "Editar", editar_producto_path(@producto), method: :get%> <br>
+              </div>
+              <div class="eliminar_producto">
+                <%= button_to "Eliminar", eliminar_producto_path(@producto), method: :get%> 
+              </div>
+            <% end %>
+            <% if current_user.id != @producto.user.id %>
+              <div onclick="location.href='<%= crear_intercambio_path(@producto.id) %>';">
+                <button>
+                Intercambiar
+                </button> 
+              </div> <br>
+            <% end %>
+            <div class="favorito_producto">
+              <% if current_user.productos_fav.include?(@producto.id) %>
+                <%= button_to "Eliminar de favoritos", eliminar_favorito_path(@producto), method: :get %>
+              <% else %>
+                <%= button_to "Agregar a favoritos", favoritos_usuario_path(@producto), method: :get %>
+              <% end %>
+            </div>
+          </div>
+          <div class="div-botones-reporte">
+            <div onclick="location.href='<%= nuevo_reporte_path(@producto) %>';">
+              <button>
+                Reportar
+              </button> 
+            </div> <br>
+            <div onclick="location.href='<%= ver_reportes_path(@producto) %>';">
+              <button>
+                Ver Reportes
+              </button> 
+            </div>
+            
+          </div>
+        <% end %>
+      </div>
+    </main>
+  </body>
+</html>

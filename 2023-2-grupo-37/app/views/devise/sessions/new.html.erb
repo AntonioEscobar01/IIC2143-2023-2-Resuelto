@@ -1,0 +1,45 @@
+<body>
+  <%= render 'shared/header' %>
+  <main>
+      <div class="fondo_forms">
+          <div class="Bienvenida">
+              <h1>¡Bienvenido de vuelta!</h1>
+          </div>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="divform">
+                <div>
+                  <input type="text" id="email" name="user[email]" placeholder="Email" class="input">
+                </div>
+
+                <div>
+                  <input type="password" id="password" name="user[password]" placeholder="Contraseña" class="input">
+                </div>
+
+                <% if devise_mapping.rememberable? %>
+                  <div class="field">
+                    <%= f.check_box :remember_me, style:"height:25px; width:25px;" %>
+                    <%= f.label :remember_me%>
+                  </div>
+                <% end %>
+
+                <button type="submit" class="custom-button">
+                  Sign In
+                  <div class="arrow-wrapper">
+                    <div class="arrow"></div>
+                  </div>
+                </button>
+              </div>
+            <% end %>
+          
+          
+          <%= render "devise/shared/links" %>
+      </div>
+      
+      
+      <% if flash[:alert] %>
+        <div class="mensajes_error">
+          <p class="alert"><%= flash[:alert] %></p>
+        </div>
+      <% end %>
+  </main>
+</body>

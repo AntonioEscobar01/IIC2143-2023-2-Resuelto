@@ -1,0 +1,55 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+reporte_1:
+  producto_id: 1
+  user_id: 2
+  user: user_2
+  producto: producto_1
+  descripcion: "Reporte de prueba"
+
+reporte_2:
+  producto_id: 5
+  user_id: 2
+  user: user_2
+  producto: producto_5
+  descripcion: "word word word word word word word word word word word word word word word word word word word 
+  word word word word word word word word word word word word word word word word word word word word word word
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word 
+   word word word word word word word word word word word word word word word word word word word word word word"
+  
+reporte_3:
+  producto_id: 1
+  user_id: 2
+  user: user_2
+  producto: producto_1
+  descripcion: "Reporte de prueba"
+
+reporte_4:
+  producto_id: 1
+  user_id: 2
+  user: user_2
+  producto: producto_1
+  descripcion: "nada de nada"
+
+reporte_5:
+  producto_id: 5
+  user_id: 1
+  user: user_1
+  producto: producto_5
+  descripcion: "Primer reporte del producto"
+
+reporte_6:
+  producto_id: 6
+  user_id: 1
+  user: user_1
+  producto: producto_6
+  descripcion: "A"

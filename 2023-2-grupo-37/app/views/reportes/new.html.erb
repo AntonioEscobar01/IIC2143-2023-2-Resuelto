@@ -1,0 +1,25 @@
+<body>
+  <%= render 'shared/header' %>
+  <main>
+    <div class="fondo_forms">
+      <div class="Bienvenida">
+          <h1>Reportar Producto</h1>
+      </div>
+      <%= form_with(model: @reporte, url: crear_reporte_path, method: "POST") do |form| %>
+        <div class="divform">
+          <div>
+            <textarea type="text" id="descripcion" name="reporte[descripcion]" 
+            placeholder="Explicación del reporte de este producto" class="textarea"
+            style="resize: none;"></textarea><br>
+          </div>
+          <button type="submit" class="custom-button">
+            Enviar Reporte
+            <div class="arrow-wrapper">
+              <div class="arrow"></div>
+            </div>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</body>

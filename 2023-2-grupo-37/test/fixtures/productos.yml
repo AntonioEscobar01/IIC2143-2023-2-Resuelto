@@ -1,0 +1,59 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+producto_1:
+  nombre: Nombre1
+  categoria: accesorio
+  user: user_1
+  user_id: 1
+  descripcion: Descripcion de prueba
+
+producto_2:
+  nombre: NULL
+  categoria: accesorio
+  user: user_3
+  user_id: 3
+  descripcion: Descripcion de prueba
+
+producto_3:
+  nombre: Nombre3
+  categoria: NULL 
+  user: user_1
+  user_id: 1
+  descripcion: descripcion de prueba
+
+# duplicado de producto_1
+producto_4:
+  nombre: Nombre1
+  categoria: accesorio
+  user: user_1
+  user_id: 1
+  descripcion: Descripcion de prueba
+
+producto_5:
+  nombre: Nombre5
+  categoria: accesorio
+  user: user_1
+  user_id: 1
+  descripcion: Descripcion de prueba
+
+producto_6:
+  nombre: Nombre6
+  categoria: accesorio
+  user: user_5
+  user_id: 5
+  descripcion: Descripcion de prueba
+
+producto_7:
+  nombre: hoodie
+  categoria: Poleron
+  user: user_1
+  user_id: 1
+  descripcion: hoodie negro
+
+producto_fav:
+  nombre: 'fav'
+  categoria: Polera
+  user: user_1
+  user_id: 1
+  descripcion: polera fav
+

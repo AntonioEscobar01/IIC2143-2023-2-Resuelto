@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Proyecto Grupo 37</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <%= render 'shared/header' %>
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>¡Bienvenidos a un Trading de Ropa!</h1>
+            </div>
+        </div>
+        <main>
+            <% if flash[:notice] %>
+                <div class="mensajes_verificacion">
+                    <p class="notice"><%= flash[:notice] %></p>
+                </div>
+            <% end %>
+        </main>
+    </body>
+</html>

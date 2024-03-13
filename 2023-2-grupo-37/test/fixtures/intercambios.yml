@@ -1,0 +1,36 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+intercambio_1:
+  producto_id: 1
+  producto: producto_1
+  id_propietario: 1
+  id_cliente : 2
+  estado: NULL
+
+intercambio_2:
+  producto_id: 5
+  producto: producto_5
+  id_propietario: 2
+  id_cliente : 3
+  estado: Pendiente
+
+intercambio_3:
+  producto_id: 3
+  producto: producto_3
+  id_propietario: 3
+  id_cliente : 1
+  estado: Pendiente
+
+intercambio_4:
+  producto_id: 4
+  producto: producto_4
+  id_propietario: 1
+  id_cliente : 2
+  estado: Pendiente
+
+intercambio_4_copy:
+  producto_id: 4
+  producto: producto_4
+  id_propietario: 1
+  id_cliente : 2
+  estado: Pendiente

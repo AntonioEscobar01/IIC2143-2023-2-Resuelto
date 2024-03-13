@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Grupo 37</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <%= render 'shared/header' %>
+  <main>
+    <% if user_signed_in? %>
+      <div class="ordenar">
+        <label class="nombre-usuario">
+          <%="Mi cuenta #{current_user.name}"%>
+        </label>
+        <div class="card-client">
+          <div class="user-picture">
+            <% if current_user.image.attached? %>
+              <div class="">
+                <%= image_tag(current_user.image.variant(resize_to_fit: [150, 150])) %>
+              </div>
+            <% else %>
+              <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 
+                256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 
+                512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path>
+              </svg>
+            <% end %>
+          </div>
+          <div class="name-client"> 
+            <%= current_user.name %> 
+          </div>
+          <br>
+          <div class="estrella-calificacion">
+            <%= star_rating(current_user.calificacion) %>
+          </div>
+          <br>
+          <div class="editar_cuenta">
+            <%= button_to "Editar", edit_user_registration_path, method: :get %>
+          </div>
+          <div class="eliminar_cuenta">
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+          </div>    
+        </div>
+      </div>
+    <% else %>
+      <div class="fondo_forms">
+        <div class="Bienvenida">
+          <h1>¡Bienvenido!</h1>
+        </div>
+        <div class="div-botones">
+          <a href="<%= new_user_session_path %>">
+            <button>
+              Sign in
+              <div class="arrow-wrapper">
+                <div class="arrow"></div>
+              </div>
+            </button>
+          </a>
+
+          <a href="<%= new_user_registration_path %>">
+            <button>
+              Sign up
+              <div class="arrow-wrapper">
+                <div class="arrow"></div>
+              </div>
+            </button>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </main>
+</body>
+</html>

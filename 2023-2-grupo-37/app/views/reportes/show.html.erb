@@ -1,0 +1,22 @@
+<body>
+  <%= render 'shared/header' %>
+  <main>
+    <% if @reportes.any? %>
+      <div class="Bienvenida">
+            <h2>Reportes del producto: <%= @producto.nombre %></h2>
+      </div>
+      <section class="element-admin">
+          <% @reportes.each do |reporte| %>
+            <div class="elements-admin">
+              <h2>Motivo Reporte:</h2>
+              <p><%= reporte.descripcion %></p>
+            </div>
+          <% end %>
+      </section>
+    <% else %>
+      <div class="btn">No hay reportes para este producto</div>
+      <%= link_to "Back", :back %>
+    <% end %>
+    
+  </main>
+</body>

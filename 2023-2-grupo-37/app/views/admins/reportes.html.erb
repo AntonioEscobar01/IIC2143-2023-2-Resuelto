@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Proyecto Grupo 37</title>
+  </head>
+  <body>
+    <%= render 'shared/header' %>
+    <main>
+        <div class="div-botones-admin">
+                <a href="/admin/productos">
+                    <button>
+                        Mostrar Productos
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </a>
+
+                <a href="/admin/usuarios">
+                    <button>
+                        Mostrar Usuarios
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </a>
+
+                <a href="/admin/intercambios">
+                    <button>
+                        Mostrar Intercambios
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </a>
+
+                <a href="/admin/reportes">
+                    <button class="selected">
+                        Mostrar Reportes
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </a>
+        </div>
+        
+        <section class="element-admin">
+            <% if @reportes.count > 0 %>
+                <% @reportes.each do |reporte| %>
+                    <div class="elements-admin">
+                        <h2> Producto reportado: <%= Producto.find(reporte.producto_id).nombre %></h2>
+                        <p> Motivo: <%= reporte.descripcion %></p>
+                        <div class="div-botones-admin-2">
+                            <%= button_to 'Editar', editar_reporte_path(reporte.id), method: :get %>
+                            <%= button_to 'Eliminar', eliminar_reporte_path(reporte.id), method: :get %>
+                        </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <div class="btn">NO HAY REPORTES</div>
+            <% end %>
+        </section>
+    </main>
+</body>
